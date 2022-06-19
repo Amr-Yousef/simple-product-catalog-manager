@@ -2,21 +2,15 @@
 
 class Furniture extends Product {
 
-    private $furnitureType;
     private $height;
     private $width;
     private $length;
 
-    public function __construct($SKU, $type, $price, $furnitureType, $height, $width, $length) {
-        parent::__construct($SKU, $type, $price);
-        $this->furnitureType = $furnitureType;
-        $this->height = $height;
-        $this->width = $width;
-        $this->length = $length;
-    }
-
-    public function getFurnitureType() {
-        return $this->furnitureType;
+    public function __construct($name, $SKU, $type, $price, $dimensions) {
+        parent::__construct($name, $SKU, $type, $price);
+        $this->height = $dimensions[0];
+        $this->width = $dimensions[1];
+        $this->length = $dimensions[2];
     }
 
     public function getHeight() {
@@ -29,6 +23,15 @@ class Furniture extends Product {
 
     public function getLength() {
         return $this->length;
+    }
+
+    public function getDimensions() {
+        return $this->height."x".$this->width."x".$this->length;
+    }
+
+    public function getPropertyValue()
+    {
+        return $this->getDimensions();
     }
 
     public function insertToDB()

@@ -2,15 +2,19 @@
 
 class Book extends Product {
 
-    private $name;
+    private $weight;
 
-    public function __construct($SKU, $type, $price, $name) {
-        parent::__construct($SKU, $type, $price);
-        $this->name = $name;
+    public function __construct($name, $SKU, $type, $price, $weight) {
+        parent::__construct($name, $SKU, $type, $price);
+        $this->weight = $weight;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getWeight() {
+        return $this->weight."KG";
+    }
+
+    public function getPropertyValue() {
+        return $this->getWeight();
     }
 
     public function insertToDB()
