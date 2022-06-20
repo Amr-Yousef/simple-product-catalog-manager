@@ -4,7 +4,7 @@ require_once "../classes/Product.php";
 require_once "../classes/Book.php";
 require_once "../classes/DVD.php";
 require_once "../classes/Furniture.php";
-
+// TODO: Move this file to the main directory (outside of the src folder)
 ?>
 <!doctype html>
 <html>
@@ -75,7 +75,7 @@ require_once "../classes/Furniture.php";
                                 PRICE
                             </div>
                             <div class="text-xl font-bold">
-                                $'.$product->getPrice().' <!-- TODO: Add currency symbol -->
+                                $'.$product->getPrice().' 
                             </div>
                         </div>
                     </div>
@@ -94,5 +94,6 @@ require_once "../classes/Furniture.php";
         ?>
     </div>
 </body>
+<!-- FEATURE: Maybe add a simple footer? -->
 </html>
 <?php  ?>
