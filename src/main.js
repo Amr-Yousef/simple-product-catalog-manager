@@ -80,7 +80,46 @@ function property(value){
     prop.innerHTML = html;
 }
 
+var finalCheckedList = [];  // Global list of the checked items
+
 function checkItem(SKU){
     var item = document.getElementById(SKU);
-    item.classList.add("bg-red-400");
+    var checkBox = document.getElementById(SKU + '-checkbox');
+
+    if(checkBox.checked){
+        item.classList.add("bg-red-400");
+        item.setAttribute("name","checked");
+    }
+    else{
+        finalCheckedList.splice(finalCheckedList.indexOf(SKU),1);  // Removes the element from the array
+
+        // Resets the item attributes to the defaults
+        item.removeAttribute("name");
+        item.classList.remove("bg-red-400");
+        item.classList.add("bg-white");
+    }
+
+
+    // Updates the finalCheckedList
+    var checkedList = document.getElementsByName("checked");
+
+    checkedList.forEach(
+        function(currentValue) {
+          finalCheckedList.push(currentValue.id);
+          finalCheckedList = [...new Set(finalCheckedList)];
+        }
+      );
+
+    if(finalCheckedList.length > 1){
+        var btn = document.getElementById("delete-product-btn");
+        btn.innerHTML = "Mass delete";
+        btn.classList.remove("bg-red-400");
+        btn.classList.add("bg-red-500");
+    }
+    else{
+        var btn = document.getElementById("delete-product-btn");
+        btn.innerHTML = "Delete";
+        btn.classList.remove("bg-red-500");
+        btn.classList.add("bg-red-400");
+    }
 }

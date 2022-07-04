@@ -892,6 +892,10 @@ select {
   border-radius: 0.375rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
 .border-transparent {
   border-color: transparent;
 }
@@ -916,9 +920,9 @@ select {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-.bg-black {
+.bg-red-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .p-7 {
@@ -1005,7 +1009,9 @@ select {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body {
+.delete-checkbox
+{
+  /* Hopefully the automated system will work with this */
 }
 
 .placeholder\:opacity-50::-moz-placeholder {
@@ -1020,9 +1026,9 @@ body {
   opacity: 0.5;
 }
 
-.checked\:bg-red-400:checked {
+.checked\:bg-red-800:checked {
   --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+  background-color: rgb(153 27 27 / var(--tw-bg-opacity));
 }
 
 .hover\:scale-110:hover {
@@ -1038,16 +1044,6 @@ body {
 .hover\:bg-red-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-green-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-blue-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
 
 .hover\:shadow-2xl:hover {
@@ -1066,11 +1062,6 @@ body {
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
-.focus\:bg-red-400:focus {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-}
-
 .focus\:bg-white:focus {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -1080,9 +1071,4 @@ body {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.active\:bg-red-400:active {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
 }

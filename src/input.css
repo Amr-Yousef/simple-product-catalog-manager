@@ -3,4 +3,7 @@
 @tailwind utilities;
 
 
-body {}
+.delete-checkbox
+{
+    /* Hopefully the automated system will work with this */
+}

@@ -26,18 +26,71 @@ require_once "../classes/Furniture.php";
             <!-- Buttons -->
             <div>
                 <a class="text-lg font-medium bg-green-300 text-gray-900 py-1 px-4 mx-12 rounded-full" href="#">Add</a>
-                <a class="text-lg font-medium bg-red-400 text-gray-900 py-1 px-4 rounded-full" href="#">Mass delete</a>
+                <a class="text-lg font-medium bg-red-400 text-gray-900 py-1 px-4 rounded-full" href="#" id="delete-product-btn">Delete</a>
             </div>
         </div>
     </nav>
 
+        
     <!-- Card div -->
     <div class="grid grid-cols-4">
+    <label id="SKU" class="rounded-3xl bg-white shadow-lg w-80 h-80 m-12 p-7 ease-in-out duration-500  hover:scale-110 hover:bg-red-400 hover:shadow-red-600 hover:shadow-2xl hover:cursor-pointer ">
+        <!-- Main list -->
+        <div class="grid grid-cols-1 grid-rows-4 gap-5">
+            <div class="grid grid-cols-2 grid-rows-1">
+                <div>
+                    <div class="text-lg font-medium opacity-50 mb-[-0.5rem]">
+                        SKU
+                    </div>
+                    <div class="text-xl font-bold">
+                        '.$product->getSKU().'
+                    </div>
+                </div>
+                <div>
+                    <input type="checkbox" class="rounded float-right checked:bg-red-800 delete-checkbox" onclick="checkItem('SKU')" id="SKU-checkbox">
+                </div>
+            </div>
+            <div>
+                <div class="text-lg font-medium opacity-50 mb-[-0.5rem]">
+                    NAME
+                </div>
+                <div class="text-xl font-bold">
+                    '.$product->getName().'
+                </div>
+            </div>
+            <div class="grid grid-cols-2 grid-rows-1">
+                <div>
+                    <div class="text-lg font-medium opacity-50 mb-[-0.5rem]">
+                        TYPE
+                    </div>
+                    <div class="text-xl font-bold">
+                        '.$product->getType().'
+                    </div>
+                </div>
+                <div class="flex flex-col content-center items-center">
+                    <div class="text-lg font-medium opacity-50 mb-[-0.5rem]">
+                        PRICE
+                    </div>
+                    <div class="text-xl font-bold">
+                        $'.$product->getPrice().' 
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="text-lg font-medium opacity-50 mb-[-0.5rem]">
+                    '.$product->getPropertyName().'
+                </div>
+                <div class="text-xl font-bold">
+                    '.$product->getPropertyValue().'
+                </div>
+            </div>
+        </div>
+    </label>
         <?php 
             $productsArray = Product::getAllProducts();
             foreach ($productsArray as $product) {
                 echo '
-                <label class="rounded-3xl bg-white shadow-lg w-80 h-80 m-12 p-7 ease-in-out duration-500  hover:scale-110 hover:bg-red-400 hover:shadow-red-600 hover:shadow-2xl hover:cursor-pointer">
+                <label id="'.$product->getSKU().'" class="rounded-3xl bg-white shadow-lg w-80 h-80 m-12 p-7 ease-in-out duration-500  hover:scale-110 hover:bg-red-400 hover:shadow-red-600 hover:shadow-2xl hover:cursor-pointer ">
                 <!-- Main list -->
                 <div class="grid grid-cols-1 grid-rows-4 gap-5">
                     <div class="grid grid-cols-2 grid-rows-1">
@@ -50,7 +103,7 @@ require_once "../classes/Furniture.php";
                             </div>
                         </div>
                         <div>
-                            <input type="checkbox" class="float-right">
+                            <input type="checkbox" class="rounded float-right checked:bg-red-800 delete-checkbox" onclick="checkItem(\''.$product->getSKU().'\')" id="'.$product->getSKU().'-checkbox">
                         </div>
                     </div>
                     <div>
@@ -93,6 +146,7 @@ require_once "../classes/Furniture.php";
             }
         ?>
     </div>
+    <script src="main.js"></script>
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>
