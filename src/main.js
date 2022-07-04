@@ -1,0 +1,86 @@
+function property(value){
+
+    prop = document.getElementById('property');
+
+    if(value == 'Furniture'){
+        html = `
+    <label class="block">
+        <span class="font-bold text-gray-700">Height (CM)</span>
+        <input type="text" class="
+            mt-1
+            block
+            w-full
+            rounded-md
+            bg-gray-100
+            border-transparent
+            focus:border-gray-500 focus:bg-white focus:ring-0
+            placeholder:opacity-50
+        " placeholder="15">
+    </label>
+    <label class="block mt-5 mb-5">
+        <span class="font-bold text-gray-700">Width (CM)</span>
+        <input type="text" class="
+            mt-1
+            block
+            w-full
+            rounded-md
+            bg-gray-100
+            border-transparent
+            focus:border-gray-500 focus:bg-white focus:ring-0
+            placeholder:opacity-50
+        " placeholder="3">
+    </label>
+    <label class="block">
+        <span class="font-bold text-gray-700">Length (CM)</span>
+        <input type="text" class="
+            mt-1
+            block
+            w-full
+            rounded-md
+            bg-gray-100
+            border-transparent
+            focus:border-gray-500 focus:bg-white focus:ring-0
+            placeholder:opacity-50
+        " placeholder="25">
+    </label>
+    <div class="mt-5">
+        <p>Provide the furniture dimensions</p>
+    </div>`
+    }
+
+    // default property field
+    else{
+        var propName; var propPlaceHolder; var propDesc;
+        if(value == 'DVD'){
+            propName = "Size (MB)"; propPlaceHolder = "200"; propDesc = "Provide the DVD size in megabytes";
+        } else if(value == 'Book'){
+            propName = "Weight (KG)"; propPlaceHolder = "2"; propDesc = "Provide the Book size in kilograms";
+        }
+
+        html = `
+        <label class="block">
+            <span class="font-bold text-gray-700">${propName}</span>
+            <input type="text" class="
+                mt-1
+                block
+                w-full
+                rounded-md
+                bg-gray-100
+                border-transparent
+                focus:border-gray-500 focus:bg-white focus:ring-0
+                placeholder:opacity-50
+            " placeholder="${propPlaceHolder}">
+        </label>
+        <div class="mt-5">
+            <p>${propDesc}</p>
+        </div>
+        `;
+    }
+
+    prop.innerHTML = html;
+}
+
+function checkItem(SKU){
+    var item = document.getElementById(SKU);
+    item.classList.add("bg-red-400");
+}
