@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 require_once "../classes/DBController.php";
 require_once "../classes/Product.php";
 require_once "../classes/Book.php";
@@ -28,18 +31,21 @@ require_once "../classes/Furniture.php";
 
             <!-- Buttons -->
             <div>
-                <a class="text-lg font-medium bg-green-300 text-gray-700 py-1 px-4 mx-12 rounded-full" href="#">Save</a>
-                <a class="text-lg font-medium bg-red-400 text-gray-700 py-1 px-4 rounded-full" href="#">Cancel</a>
+                <!-- <iframe name="foo" style="display:none;"></iframe> -->
+                <input target="foo" form="product_form" type="submit" value="Save" class="text-lg font-medium bg-green-300 text-gray-700 py-1 px-4 mx-12 rounded-full">
+                <a class="text-lg font-medium bg-red-400 text-gray-700 py-1 px-4 rounded-full" href="index.php">Cancel</a>
             </div>
         </div>
     </nav>
-    <div class="grid grid-cols-2 gap-6 items-center max-w-[80%]">
+    <form id="product_form" action="#" method="post" class="grid grid-cols-2 gap-6 items-center max-w-[80%]">
         <!-- TODO: Add icons for the input fields-->
         <div class="max-w-s m-12">
             <div class="grid gap-6">
                 <label class="block">
-                    <span class="font-bold text-gray-700">SKU#</span>
-                    <input type="text" class="
+                    <span class="font-bold text-gray-700">
+                        SKU#      
+                    </span>
+                    <input type="text" name="SKU" id="sku" class="
                         mt-1
                         block
                         w-full
@@ -52,7 +58,7 @@ require_once "../classes/Furniture.php";
                 </label>
                 <label class="block">
                     <span class="font-bold text-gray-700">Name</span>
-                    <input type="text" class="
+                    <input type="text" name="name" id="name" class="
                         mt-1
                         block
                         w-full
@@ -65,7 +71,7 @@ require_once "../classes/Furniture.php";
                 </label>
                 <label class="block">
                     <span class="font-bold text-gray-700">Price</span>
-                    <input type="text" class="
+                    <input type="text" name="price" id="price" class="
                         mt-1
                         block
                         w-full
@@ -78,7 +84,7 @@ require_once "../classes/Furniture.php";
                 </label>
                 <label>
                     <span class="font-bold text-gray-700">Product Type</span>
-                    <select onchange="property(this.value)"
+                    <select name="productType" id="productType" onchange="property(this.value)"
                     class="
                         block
                         w-full
@@ -99,10 +105,44 @@ require_once "../classes/Furniture.php";
         <div id="property" class="max-w-xs m-12">
             
         </div>
-    </div>
+    </form>
     <script src="main.js"></script>
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 
 </html>
-<?php  ?>
+<?php 
+
+// I KNOW that this is propbably the worst thing you've ever seen, hopefully I'll remember to fix it later. I'm sorry.
+function checkDimensions($a){
+    if(gettype($a) == "array"){
+        $x = $a[0] == '' ? 0 : 1;
+        $y = $a[1] == '' ? 0 : 1;
+        $z = $a[2] == '' ? 0 : 1;
+        return ($x + $y + $z) == 3 ? 1 : 0;
+    }
+    return $a != '' ? '1' : '0';
+}
+
+if(isset($_POST["SKU"]) || isset($_POST["name"]) || isset($_POST["price"]) || isset($_POST["productType"])){
+    // TODO: Add these cheecks into the Product class. This will allow us later on to add more checks.
+    // When making a product object make sure you are using the values of the $_POST and not the values you are using for checks.
+
+    $sku = $_POST["SKU"] == '' ? 0 : 1;
+    // TODO: Check for duplicate SKU in the database
+
+    $name = $_POST["name"] == '' ? 0 : 1;
+    $price = $_POST["price"] == '' ? 0 : 1;
+    
+    $productType = !isset($_POST["productType"]) ? 0 : $_POST["productType"];
+    $propertyValue = !isset($_POST["propertyValue"]) ? 0 : checkDimensions($_POST["propertyValue"]);
+
+    // This is to basically print out error messages. Could've I used PHP for this and made it simpler? Probably. 
+    echo '
+<script type="text/javascript">
+verifyFields('.$sku.', '.$name.', '.$price.', "'.$productType.'", '.$propertyValue.');
+</script>
+    ';
+}
+
+?>
