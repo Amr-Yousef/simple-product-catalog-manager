@@ -19,7 +19,10 @@ class Book extends Product {
 
     public function insertToDB()
     {
-        // Function to insert DVD to DB
+        $db = new DBController;
+        $db->openConnection();
+
+        return $db->insert("INSERT INTO book VALUES ('$this->SKU', '$this->name', '$this->type', '$this->price', '$this->weight')");
     }
 }
 

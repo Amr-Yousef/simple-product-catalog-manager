@@ -98,4 +98,3 @@ require_once "../classes/Furniture.php";
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>
-<?php  ?>

@@ -36,7 +36,10 @@ class Furniture extends Product {
 
     public function insertToDB()
     {
-        // Function to insert DVD to DB
+        $db = new DBController;
+        $db->openConnection();
+
+        return $db->insert("INSERT INTO furniture VALUES ('$this->SKU', '$this->name', '$this->type', '$this->price', '$this->height', '$this->width', '$this->length')");
     }
 }
 

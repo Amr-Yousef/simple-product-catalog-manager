@@ -2,11 +2,11 @@
 
 abstract class Product {
 
-    private $name;
-    private $SKU;
-    private $type;
-    private $price;
-    private $propertyName;
+    protected $name;
+    protected $SKU;
+    protected $type;
+    protected $price;
+    protected $propertyName;
 
     public function __construct($name, $SKU, $type, $price) {
         $this->name = $name;
@@ -146,7 +146,7 @@ abstract class Product {
 
     abstract public function getPropertyValue();
 
-    abstract public function insertToDB();  
+    abstract public function insertToDB();  // Could've I just put the code here? Probably.
 
 }
 

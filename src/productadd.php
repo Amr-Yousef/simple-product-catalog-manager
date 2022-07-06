@@ -6,6 +6,8 @@ require_once "../classes/Book.php";
 require_once "../classes/DVD.php";
 require_once "../classes/Furniture.php";
 // TODO: Move this file to the main directory (outside of the src folder)
+
+ob_start(); // I have absolutely no idea why this works, but it does. I mean it makes a little bit of sense but I still don't get it.
 ?>
 <!doctype html>
 <html>
@@ -136,6 +138,26 @@ echo '
 verifyFields('.$sku.', '.$name.', '.$price.', "'.$productType.'", '.$propertyValue.');
 </script>
 ';
+
+
+    $productType = strlen($productType) > 1 ? 1 : 0; // This is to set a boolean value for the product type. 
+
+    if($sku == 1 && $name == 1 && $price == 1 && $productType == 1 && $propertyValue == 1){
+        $sku = $_POST["SKU"];
+        $name = $_POST["name"];
+        $price = $_POST["price"];
+        $productType = $_POST["productType"];
+        $propertyValue = $_POST["propertyValue"];
+
+        $newProduct = Product::createProductObject($name, $sku, $productType, $price, $propertyValue);
+        if(isset($newProduct)){
+            if($newProduct->insertToDB()){
+                header("Location: index.php");
+            } else {
+                echo "If this message appears then I have no idea what happened and I'll probably attempt to fix it for a long time.";
+            }
+        }
+    }
 }
 
 ?>

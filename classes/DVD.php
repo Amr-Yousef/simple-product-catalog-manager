@@ -19,7 +19,10 @@ class DVD extends Product {
 
     public function insertToDB()
     {
-        // Function to insert DVD to DB
+        $db = new DBController;
+        $db->openConnection();
+
+        return $db->insert("INSERT INTO dvd VALUES ('$this->SKU', '$this->name', '$this->type', '$this->price', '$this->size')");
     }
 }
 
