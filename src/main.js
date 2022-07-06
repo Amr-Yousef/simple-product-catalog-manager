@@ -112,16 +112,22 @@ function checkItem(SKU){
 
     if(finalCheckedList.length > 1){
         var btn = document.getElementById("delete-product-btn");
-        btn.innerHTML = "Mass delete";
+        btn.setAttribute("value","Mass Delete");
         btn.classList.remove("bg-red-400");
         btn.classList.add("bg-red-500");
     }
     else{
         var btn = document.getElementById("delete-product-btn");
-        btn.innerHTML = "Delete";
+        btn.setAttribute("value","Delete");
         btn.classList.remove("bg-red-500");
         btn.classList.add("bg-red-400");
     }
+
+    document.cookie = "checkedList=" + finalCheckedList;
+}
+
+function checkedArray(){
+    return finalCheckedList;
 }
 
 // SKU: 0, empty | 1, OK | -1, duplicate
@@ -167,3 +173,4 @@ function verifyFields(SKU, name, price, type, property){
     }
 
 }
+

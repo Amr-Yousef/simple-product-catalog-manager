@@ -24,9 +24,11 @@ require_once "../classes/Furniture.php";
             <!-- FEATURE: Add search bar here -->
 
             <!-- Buttons -->
-            <div>
+            <div class="grid grid-cols-2">
                 <a class="text-lg font-medium bg-green-300 text-gray-900 py-1 px-4 mx-12 rounded-full" href="productadd.php">Add</a>
-                <a class="text-lg font-medium bg-red-400 text-gray-900 py-1 px-4 rounded-full" href="#" id="delete-product-btn">Delete</a>
+                <form action="index.php" method="post" class="flex justify-around">
+                    <input type="submit" value="Delete" class="text-lg font-medium bg-red-400 text-gray-900 py-1 px-4 rounded-full hover:cursor-pointer" href="#" id="delete-product-btn" name="delete-product-btn"/>
+                </form>
             </div>
         </div>
     </nav>
@@ -98,3 +100,13 @@ require_once "../classes/Furniture.php";
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>
+<?php
+
+if(isset($_POST["delete-product-btn"])){
+
+    $arr = explode(",", $_COOKIE["checkedList"]);
+    
+    Product::massDeleteProduct($arr);
+}
+
+?>

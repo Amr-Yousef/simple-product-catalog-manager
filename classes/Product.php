@@ -90,6 +90,24 @@ abstract class Product {
             return -1;  // Unknown product type
     }
 
+    public static function deleteProduct($SKU) {
+        $db = new DBController;
+        $db->openConnection();
+
+        $db->delete("DELETE FROM book WHERE sku='$SKU'");
+        $db->delete("DELETE FROM dvd WHERE sku='$SKU'");
+        $db->delete("DELETE FROM furniture WHERE sku='$SKU'");
+    }
+
+    public static function massDeleteProduct($skuList) {
+        $db = new DBController;
+        $db->openConnection();
+
+        foreach($skuList as $sku) {
+            Product::deleteProduct($sku);
+        }
+    }
+
     // Checks. This will allow us to expand it in the future if needed.
     public static function checkProductName($name) {
         if(strlen($name) < 1)
