@@ -135,6 +135,9 @@ function verifyFields(SKU, name, price, type, property){
     var priceElementLabel = document.getElementById("price").previousElementSibling;
     var propertyType = document.getElementById("productType").previousElementSibling;
     var propertyElement = document.getElementById("property");
+    
+    console.log(type);
+    console.log(property);
 
     if(SKU == 0){
         skuElementLabel.insertAdjacentHTML("beforeend", `<span class="ml-10 text-red-500 text-xs ">* SKU number is required</span>`);

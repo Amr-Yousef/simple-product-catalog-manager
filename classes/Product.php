@@ -79,6 +79,71 @@ abstract class Product {
         return $productsArray;
     }
 
+    public static function createProductObject($name, $SKU, $type, $price, $propertyValue) {
+        if($type == "DVD")
+            return new DVD($name, $SKU, $type, $price, $propertyValue);
+        else if($type == "Furniture")
+            return new Furniture($name, $SKU, $type, $price, $propertyValue);
+        else if($type == "Book")
+            return new Book($name, $SKU, $type, $price, $propertyValue);
+        else
+            return -1;  // Unknown product type
+    }
+
+    // Checks. This will allow us to expand it in the future if needed.
+    public static function checkProductName($name) {
+        if(strlen($name) < 1)
+            return 0;
+        else
+            return 1;
+    }
+
+    public static function checkProductSKU($SKU) {
+        if(strlen($SKU) < 1)
+            return 0;
+        
+
+        $db = new DBController;
+        $db->openConnection();
+
+        // Checks if the SKU is already in the database
+        if(count($db->select("SELECT sku FROM book WHERE sku='$SKU' UNION SELECT sku FROM dvd WHERE sku='$SKU' UNION SELECT sku FROM furniture WHERE sku='$SKU'")) > 0)
+            return -1;
+
+        return 1;
+    }
+
+    public static function checkProductType($type) {
+        if(strlen($type) < 1)
+            return 0;
+        else
+            return $type;
+    }
+
+    public static function checkProductPrice($price) {
+        if(strlen($price) < 1)
+            return 0;
+        else
+            return 1;
+    }
+
+    public static function checkProductPropertyValue($propertyValue) {
+        
+        // I KNOW that this is propbably the worst thing you've ever seen, hopefully I'll remember to fix it later. I'm sorry.
+        if(gettype($propertyValue) == "array"){
+            $x = $propertyValue[0] == '' ? 0 : 1;
+            $y = $propertyValue[1] == '' ? 0 : 1;
+            $z = $propertyValue[2] == '' ? 0 : 1;
+            return ($x + $y + $z) == 3 ? 1 : 0;
+        }
+        else if(strlen($propertyValue) < 1 or is_null($propertyValue) or $propertyValue == '')
+            return 0;
+
+        return 1;
+    }
+
+
+
     abstract public function getPropertyValue();
 
     abstract public function insertToDB();  
