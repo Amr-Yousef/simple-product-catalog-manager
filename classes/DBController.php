@@ -1,10 +1,10 @@
 <?php 
 
     class DBController {
-    public $dbHost = "localhost";
-    public $dbUser = "root";
-    public $dbPassword = "";
-    public $dbName = "products";
+    public $dbHost = "ec2-34-242-84-130.eu-west-1.compute.amazonaws.com";
+    public $dbUser = "atoggxppbtixfi";
+    public $dbPassword = "846a40787b4d0f58e1052829c8eac2e21854f7f086f7801ff9fdaf890047ab19";
+    public $dbName = "dd4df335g7oksa";
     public $connection;
 
     public function openConnection()

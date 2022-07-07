@@ -12,14 +12,14 @@ require_once "classes/Furniture.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="dist/output.css" rel="stylesheet">
-  <title>Productssss List</title>
+  <title>Products List</title>
 </head>
 <body>
     <nav class="bg-white drop-shadow-lg px-6 py-4">
         <!-- Container div -->
         <div class="container flex flex-wrap justify-between items-center">
             <!-- Name -->
-            <a class="font-sans font-medium text-2xl">Product list</a>
+            <a class="font-sans font-medium text-2xl">Products list</a>
             
             <!-- FEATURE: Add search bar here -->
 
@@ -33,7 +33,10 @@ require_once "classes/Furniture.php";
         </div>
     </nav>
 
-        
+    <?php 
+    $db = new DBController();
+    echo $db->openConnection() ? "Connection opened" : "Connection failed";
+    ?>
     <!-- Card div -->
     <div class="grid grid-cols-4">
         <?php 
