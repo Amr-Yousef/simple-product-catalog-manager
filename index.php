@@ -1,9 +1,9 @@
 <?php 
-require_once "../classes/DBController.php";
-require_once "../classes/Product.php";
-require_once "../classes/Book.php";
-require_once "../classes/DVD.php";
-require_once "../classes/Furniture.php";
+require_once "classes/DBController.php";
+require_once "classes/Product.php";
+require_once "classes/Book.php";
+require_once "classes/DVD.php";
+require_once "classes/Furniture.php";
 // TODO: Move this file to the main directory (outside of the src folder)
 ?>
 <!doctype html>
@@ -11,7 +11,7 @@ require_once "../classes/Furniture.php";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../dist/output.css" rel="stylesheet">
+  <link href="dist/output.css" rel="stylesheet">
   <title>Products List</title>
 </head>
 <body>
@@ -25,7 +25,7 @@ require_once "../classes/Furniture.php";
 
             <!-- Buttons -->
             <div class="grid grid-cols-2">
-                <a class="text-lg font-medium bg-green-300 text-gray-900 py-1 px-4 mx-12 rounded-full" href="productadd.php">Add</a>
+                <a class="text-lg font-medium bg-green-300 text-gray-900 py-1 px-4 mx-12 rounded-full" href="src/productadd.php">Add</a>
                 <form action="index.php" method="post" class="flex justify-around">
                     <input type="submit" value="Delete" class="text-lg font-medium bg-red-400 text-gray-900 py-1 px-4 rounded-full hover:cursor-pointer" href="#" id="delete-product-btn" name="delete-product-btn"/>
                 </form>

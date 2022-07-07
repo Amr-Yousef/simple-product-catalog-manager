@@ -33,7 +33,7 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
             <div>
                 <!-- <iframe name="foo" style="display:none;"></iframe> -->
                 <input target="foo" form="product_form" type="submit" value="Save" class="text-lg font-medium bg-green-300 text-gray-700 py-1 px-4 mx-12 rounded-full hover:cursor-pointer">
-                <a class="text-lg font-medium bg-red-400 text-gray-700 py-1 px-4 rounded-full" href="index.php">Cancel</a>
+                <a class="text-lg font-medium bg-red-400 text-gray-700 py-1 px-4 rounded-full" href="../index.php">Cancel</a>
             </div>
         </div>
     </nav>
@@ -152,7 +152,7 @@ verifyFields('.$sku.', '.$name.', '.$price.', "'.$productType.'", '.$propertyVal
         $newProduct = Product::createProductObject($name, $sku, $productType, $price, $propertyValue);
         if(isset($newProduct)){
             if($newProduct->insertToDB()){
-                header("Location: index.php");
+                header("Location: ../index.php");
             } else {
                 echo "If this message appears then I have no idea what happened and I'll probably attempt to fix it for a long time.";
             }
