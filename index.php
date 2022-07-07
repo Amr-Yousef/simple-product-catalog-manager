@@ -12,7 +12,7 @@ require_once "classes/Furniture.php";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="dist/output.css" rel="stylesheet">
-  <title>Products List</title>
+  <title>Productssss List</title>
 </head>
 <body>
     <nav class="bg-white drop-shadow-lg px-6 py-4">
@@ -96,7 +96,7 @@ require_once "classes/Furniture.php";
             }
         ?>
     </div>
-    <script src="main.js"></script>
+    <script src="src/main.js"></script>
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>
