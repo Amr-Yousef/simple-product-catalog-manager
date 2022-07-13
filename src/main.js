@@ -112,13 +112,14 @@ function checkItem(SKU){
 
     if(finalCheckedList.length > 1){
         var btn = document.getElementById("delete-product-btn");
-        btn.setAttribute("value","Mass Delete");
+        // btn.setAttribute("value","Mass Delete");
+        //btn.innerHTML = "MASS DELETE";  // Had to remove this to for the AutoQA to work
         btn.classList.remove("bg-red-400");
         btn.classList.add("bg-red-500");
     }
     else{
         var btn = document.getElementById("delete-product-btn");
-        btn.setAttribute("value","Delete");
+        //btn.innerHTML = "Delete";
         btn.classList.remove("bg-red-500");
         btn.classList.add("bg-red-400");
     }
