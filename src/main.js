@@ -1,3 +1,5 @@
+import $ from '../node_modules/jquery';
+
 function property(value){
 
     prop = document.getElementById('property');

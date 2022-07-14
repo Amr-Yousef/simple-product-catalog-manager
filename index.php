@@ -27,14 +27,14 @@ ob_start();
 
             <!-- Buttons -->
             <div class="grid grid-cols-2">
-                <a class="text-lg font-medium bg-green-300 text-gray-900 py-1 px-4 mx-12 rounded-full" href="src/productadd.php">Add</a>
+                <a class="text-lg font-medium bg-green-300 text-gray-900 py-1 px-4 mx-12 rounded-full" href="src/productadd.php">ADD</a>
                 <form action="index.php" method="post" class="flex justify-around">
                     <button type="submit" value="Delete" class="text-lg font-medium bg-red-400 text-gray-900 py-1 px-4 rounded-full hover:cursor-pointer" href="#" id="delete-product-btn" name="delete-product-btn">MASS DELETE</button>
                 </form>
             </div>
         </div>
     </nav>
-
+    <p>TEST</p>
     <!-- Card div -->
     <div class="grid grid-cols-4">
         <?php 
@@ -97,7 +97,13 @@ ob_start();
             }
         ?>
     </div>
-    <script src="src/main.js"></script>
+    <script type="module" src="src/main.js"></script>
+    <script>
+        
+        $(document).ready(function() {
+            $("p").hide();
+        });
+    </script>
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>
