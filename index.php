@@ -15,6 +15,7 @@ ob_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="dist/output.css" rel="stylesheet">
   <title>Products List</title>
+  <script src="./src/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <nav class="bg-white drop-shadow-lg px-6 py-4">
@@ -34,7 +35,7 @@ ob_start();
             </div>
         </div>
     </nav>
-    <p>TEST</p>
+    <p>AY YO JQUERY IS NOT WORKING FOR SOME REASON DUDE</p>
     <!-- Card div -->
     <div class="grid grid-cols-4">
         <?php 
@@ -98,12 +99,6 @@ ob_start();
         ?>
     </div>
     <script type="module" src="src/main.js"></script>
-    <script>
-        
-        $(document).ready(function() {
-            $("p").hide();
-        });
-    </script>
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>

@@ -1,4 +1,64 @@
-import $ from '../node_modules/jquery';
+// TODO: REMOVE THIS LATER
+
+$(document).ready(function(){
+    $('p').hide();
+});
+
+function submitClick(){
+    form = $('#product_form').serializeArray();
+
+    $.each(form, function(i, field){
+        require(field.name, field.value);
+    });
+    
+    
+    
+    $.ajax({
+        url: "../process/addproduct.php",
+        type: "POST",
+        data: {
+            sku: $("#sku").val(),
+            name: $("#name").val(),
+            price: $("#price").val()
+        },
+        success: function(){
+            // alert("sent");
+        }
+    });
+    return false;
+}
+
+function require(fieldName, text){
+    console.log(fieldName);
+    console.log(text);
+
+    let field = document.getElementById(fieldName);
+    let fieldLabel = field.previousElementSibling;
+    
+    if(text.length < 1){
+        fieldLabel.innerHTML = "* This field is required";
+    }
+    else{
+        fieldLabel.innerHTML = "";
+    }
+
+    if(fieldName == "sku"){
+        $.ajax({
+            url: "../process/skuCheck.php",
+            type: "POST",
+            data: {sku: field.value},
+            success: function(res){
+                if(res == -1){
+                    document.getElementById(field.name).previousElementSibling.innerHTML = "* This SKU already exists";
+                }
+            }
+        });
+    }
+
+    if(fieldName == "price" || fieldName == "height" || fieldName == "width" || fieldName == "length" || fieldName == "weight"){
+        console.log(fieldName);
+    }
+}
 
 function property(value){
 
@@ -8,6 +68,7 @@ function property(value){
         html = `
     <label class="block">
         <span class="font-bold text-gray-700">Height (CM)</span>
+        <span class="ml-10 text-red-500 text-xs"></span>
         <input type="text" id="height" name="propertyValue[]" class="
             mt-1
             block
@@ -21,6 +82,7 @@ function property(value){
     </label>
     <label class="block mt-5 mb-5">
         <span class="font-bold text-gray-700">Width (CM)</span>
+        <span class="ml-10 text-red-500 text-xs"></span>
         <input type="text" id="width" name="propertyValue[]" class="
             mt-1
             block
@@ -34,6 +96,7 @@ function property(value){
     </label>
     <label class="block">
         <span class="font-bold text-gray-700">Length (CM)</span>
+        <span class="ml-10 text-red-500 text-xs"></span>
         <input type="text" id="length" name="propertyValue[]" class="
             mt-1
             block
@@ -62,6 +125,7 @@ function property(value){
         html = `
         <label class="block">
             <span class="font-bold text-gray-700">${propName}</span>
+            <span class="ml-10 text-red-500 text-xs"></span>
             <input type="text" id=${propID} name="propertyValue" class="
                 mt-1
                 block
