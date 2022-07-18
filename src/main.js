@@ -8,33 +8,42 @@ function isNumeric(str) {
 
 function submitClick(){
     form = $('#product_form').serializeArray();
-    console.log(form);
 
+    // There should be a better way to do this but I will need to revisit it later because I can't think of a better way currently
+    let sendFlag = false;
+    let counter = 0;
     $.each(form, function(i, field){
-        require(field.name, field.value);
+        if(require(field.name, field.value))
+            counter++;
+        
+        if(counter == form.length)
+            sendFlag = true;
     });
-    
-    
-    let propertiesArr = JSON.stringify(propertiesArray());
 
-    $.ajax({
-        url: "../process/addproduct.php",
-        type: "POST",
-        data: {
-            sku: $("#sku").val(),
-            name: $("#name").val(),
-            price: $("#price").val(),
-            type: $("#productType").val(),
-            propArr: propertiesArr
-        },
-        success: function(res){
-            alert(res);
-        }
-    });
+    if(sendFlag){
+        let propertiesArr = JSON.stringify(propertiesArray());
+    
+        $.ajax({
+            url: "../process/addproduct.php",
+            type: "POST",
+            data: {
+                sku: $("#sku").val(),
+                name: $("#name").val(),
+                price: $("#price").val(),
+                type: $("#productType").val(),
+                propArr: propertiesArr
+            },
+            success: function(res){
+                alert(res);
+            }
+        });
+    }    
     return false;
 }
 
 function require(fieldName, text){
+    // Something about the multiple returns I have is making me think I am missing something
+    // TODO: Take a look at this after being done with everything else
 
     let field = document.getElementById(fieldName);
     let fieldLabel;
@@ -43,6 +52,7 @@ function require(fieldName, text){
 
         if(text.length < 1){
             fieldLabel.innerHTML = "* This field is required";
+            return false;
         }
         else{
             fieldLabel.innerHTML = "";
@@ -58,9 +68,11 @@ function require(fieldName, text){
             
             if(propValue.length < 1){
                 propValueLabel.innerHTML = "* This field is required";
+                return false;
             }
             else if (!isNumeric(propValue)){
                 propValueLabel.innerHTML = "* This field must be a number";
+                return false;
             } else {
                 propValueLabel.innerHTML = "";
             }
@@ -70,26 +82,30 @@ function require(fieldName, text){
     
     // Checks if SKU is already in the database
     if(fieldName == "sku"){
+        skuFlag = true;
         $.ajax({
             url: "../process/skuCheck.php",
             type: "POST",
             data: {sku: text},
+            async: false,
             success: function(res){
                 if(res == -1){
                     document.getElementById(field.name).previousElementSibling.innerHTML = "* This SKU already exists";
+                    skuFlag = false;
                 }
             }
         });
+        return skuFlag;
     }
 
     if(fieldName == "price" && text != ""){
         if(!isNumeric(text)){
             document.getElementById(field.name).previousElementSibling.innerHTML = "* This field must be a number";
+            return false;
         }
     }
 
-
-    return flag;
+    return true;
 }
 
 function propertyDisplay(value){
