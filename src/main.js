@@ -19,19 +19,22 @@ function submitClick(){
     });
     
     
-    
-    // $.ajax({
-    //     url: "../process/addproduct.php",
-    //     type: "POST",
-    //     data: {
-    //         sku: $("#sku").val(),
-    //         name: $("#name").val(),
-    //         price: $("#price").val()
-    //     },
-    //     success: function(){
-    //         // alert("sent");
-    //     }
-    // });
+    let propertiesArr = JSON.stringify(propertiesArray());
+
+    $.ajax({
+        url: "../process/addproduct.php",
+        type: "POST",
+        data: {
+            sku: $("#sku").val(),
+            name: $("#name").val(),
+            price: $("#price").val(),
+            type: $("#productType").val(),
+            propArr: propertiesArr
+        },
+        success: function(res){
+            alert(res);
+        }
+    });
     return false;
 }
 
@@ -90,6 +93,7 @@ function require(fieldName, text){
     }
 
 
+    return flag;
 }
 
 function propertyDisplay(value){
@@ -135,6 +139,15 @@ function propertyDisplay(value){
             prop.innerHTML = html;
         }
     });
+}
+
+function propertiesArray(){
+    arr = [];
+    $.each(document.getElementsByName("propertyValue"), function(i, field){
+        arr.push(field.value);
+    }
+    );
+    return arr;
 }
 
 var finalCheckedList = [];  // Global list of the checked items
