@@ -1,11 +1,11 @@
 // TODO: REMOVE THIS LATER
-
 $(document).ready(function(){
     $('p').hide();
 });
 
 function submitClick(){
     form = $('#product_form').serializeArray();
+    console.log(form);
 
     $.each(form, function(i, field){
         require(field.name, field.value);
@@ -13,18 +13,18 @@ function submitClick(){
     
     
     
-    $.ajax({
-        url: "../process/addproduct.php",
-        type: "POST",
-        data: {
-            sku: $("#sku").val(),
-            name: $("#name").val(),
-            price: $("#price").val()
-        },
-        success: function(){
-            // alert("sent");
-        }
-    });
+    // $.ajax({
+    //     url: "../process/addproduct.php",
+    //     type: "POST",
+    //     data: {
+    //         sku: $("#sku").val(),
+    //         name: $("#name").val(),
+    //         price: $("#price").val()
+    //     },
+    //     success: function(){
+    //         // alert("sent");
+    //     }
+    // });
     return false;
 }
 
@@ -33,7 +33,19 @@ function require(fieldName, text){
     console.log(text);
 
     let field = document.getElementById(fieldName);
+    let propValues = document.getElementsByName("propertyValue");
     let fieldLabel = field.previousElementSibling;
+
+    $.each(propValues, function(i, value){
+        propValueLabel = value.previousElementSibling;
+        if(value.value == ""){
+            propValueLabel.innerHTML = "* This field is required";
+        }
+        else{
+            propValueLabel.innerHTML = "";
+        }
+    }
+    );
     
     if(text.length < 1){
         fieldLabel.innerHTML = "* This field is required";
@@ -55,95 +67,52 @@ function require(fieldName, text){
         });
     }
 
-    if(fieldName == "price" || fieldName == "height" || fieldName == "width" || fieldName == "length" || fieldName == "weight"){
-        console.log(fieldName);
-    }
+
 }
 
-function property(value){
+function propertyDisplay(value){
 
     prop = document.getElementById('property');
 
-    if(value == 'Furniture'){
-        html = `
-    <label class="block">
-        <span class="font-bold text-gray-700">Height (CM)</span>
-        <span class="ml-10 text-red-500 text-xs"></span>
-        <input type="text" id="height" name="propertyValue[]" class="
-            mt-1
-            block
-            w-full
-            rounded-md
-            bg-gray-100
-            border-transparent
-            focus:border-gray-500 focus:bg-white focus:ring-0
-            placeholder:opacity-50
-        " placeholder="15">
-    </label>
-    <label class="block mt-5 mb-5">
-        <span class="font-bold text-gray-700">Width (CM)</span>
-        <span class="ml-10 text-red-500 text-xs"></span>
-        <input type="text" id="width" name="propertyValue[]" class="
-            mt-1
-            block
-            w-full
-            rounded-md
-            bg-gray-100
-            border-transparent
-            focus:border-gray-500 focus:bg-white focus:ring-0
-            placeholder:opacity-50
-        " placeholder="3">
-    </label>
-    <label class="block">
-        <span class="font-bold text-gray-700">Length (CM)</span>
-        <span class="ml-10 text-red-500 text-xs"></span>
-        <input type="text" id="length" name="propertyValue[]" class="
-            mt-1
-            block
-            w-full
-            rounded-md
-            bg-gray-100
-            border-transparent
-            focus:border-gray-500 focus:bg-white focus:ring-0
-            placeholder:opacity-50
-        " placeholder="25">
-    </label>
-    <div class="mt-5">
-        <p>Provide the furniture dimensions</p>
-    </div>`
-    }
+    $.ajax({
+        url: "../process/propertyDisplay.php",
+        type: "POST",
+        data: {productType: value},
+        success: function(res){
+            let properties = JSON.parse(res);
+            let description = properties.pop();
+            
+            html = ''; 
+            $.each(properties, function(i, value){
+                let name = value[0].charAt(0).toUpperCase() + value[0].slice(1);    // Capitalizes the first letter of the property name
+                let unit = value[1];
+                let placeholder = value[2];
 
-    // default property field
-    else{
-        var propName; var propPlaceHolder; var propDesc;
-        if(value == 'DVD'){
-            propName = "Size (MB)"; propPlaceHolder = "200"; propDesc = "Provide the DVD size in megabytes"; propID = "size";
-        } else if(value == 'Book'){
-            propName = "Weight (KG)"; propPlaceHolder = "2"; propDesc = "Provide the Book size in kilograms"; propID = "weight";
+                html +=
+                `<label class="block m-5">
+                <span class="font-bold text-gray-700">${name} (${unit.toUpperCase()})</span>
+                <span class="ml-10 text-red-500 text-xs"></span>
+                <input type="text" id="${name}" name="propertyValue" class="
+                    mt-1
+                    block
+                    w-full
+                    rounded-md
+                    bg-gray-100
+                    border-transparent
+                    focus:border-gray-500 focus:bg-white focus:ring-0
+                    placeholder:opacity-50
+                " placeholder="${placeholder}">
+                </label>`
+
+            })
+            html += `
+            <div class="m-5">
+                <p>${description}</p>
+            </div>
+            `
+            prop.innerHTML = html;
         }
-
-        html = `
-        <label class="block">
-            <span class="font-bold text-gray-700">${propName}</span>
-            <span class="ml-10 text-red-500 text-xs"></span>
-            <input type="text" id=${propID} name="propertyValue" class="
-                mt-1
-                block
-                w-full
-                rounded-md
-                bg-gray-100
-                border-transparent
-                focus:border-gray-500 focus:bg-white focus:ring-0
-                placeholder:opacity-50
-            " placeholder="${propPlaceHolder}">
-        </label>
-        <div class="mt-5">
-            <p>${propDesc}</p>
-        </div>
-        `;
-    }
-
-    prop.innerHTML = html;
+    });
 }
 
 var finalCheckedList = [];  // Global list of the checked items
@@ -179,7 +148,7 @@ function checkItem(SKU){
     if(finalCheckedList.length > 1){
         var btn = document.getElementById("delete-product-btn");
         // btn.setAttribute("value","Mass Delete");
-        //btn.innerHTML = "MASS DELETE";  // Had to remove this to for the AutoQA to work
+        // btn.innerHTML = "MASS DELETE";  // Had to remove this to for the AutoQA to work
         btn.classList.remove("bg-red-400");
         btn.classList.add("bg-red-500");
     }

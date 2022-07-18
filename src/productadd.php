@@ -32,7 +32,7 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
 
             <!-- Buttons -->
             <div>
-                <input form="product_form" onclick="return submitClick();" type="submit" value="Save" class="text-lg font-medium bg-green-300 text-gray-700 py-1 px-4 mx-12 rounded-full hover:cursor-pointer">
+                <input form="product_form" onclick="return submitClick();" type="Button" value="Save" class="text-lg font-medium bg-green-300 text-gray-700 py-1 px-4 mx-12 rounded-full hover:cursor-pointer">
                 <a class="text-lg font-medium bg-red-400 text-gray-700 py-1 px-4 rounded-full" href="../index.php">Cancel</a>
             </div>
         </div>
@@ -44,7 +44,7 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
             <div class="grid gap-6">
                 <label class="block">
                     <span class="font-bold text-gray-700">
-                        SKU#      
+                        SKU#
                     </span>
                     <span class="ml-10 text-red-500 text-xs"></span>
                     <input type="text" name="sku" id="sku" class="
@@ -89,8 +89,7 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
                 <label>
                     <span class="font-bold text-gray-700">Product Type</span>
                     <span class="ml-10 text-red-500 text-xs"></span>
-                    <select name="productType" id="productType" onchange="//property(this.value)"
-                    class="
+                    <select name="productType" id="productType" onchange="propertyDisplay(this.value)" class="
                         block
                         w-full
                         mt-1
@@ -108,7 +107,6 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
             </div>
         </div>
         <div id="property" class="max-w-xs m-12">
-            
         </div>
     </form>
     <script src="main.js"></script>
@@ -116,7 +114,7 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
 <!-- FEATURE: Maybe add a simple footer? -->
 
 </html>
-<?php 
+<?php
 
 // if(isset($_POST["sku"]) || isset($_POST["name"]) || isset($_POST["price"]) || isset($_POST["productType"])){
 //     // TODO: Add these cheecks into the Product class. This will allow us later on to add more checks.
