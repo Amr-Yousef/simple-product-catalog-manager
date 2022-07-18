@@ -35,11 +35,10 @@ ob_start();
             </div>
         </div>
     </nav>
-    <p>AY YO JQUERY IS NOT WORKING FOR SOME REASON DUDE</p>
     <!-- Card div -->
     <div class="grid grid-cols-4">
         <?php 
-            $productsArray = Product::getAllProducts();
+            $productsArray = Product::getAllProducts();  // I could probably use Ajax for this too now that I know more about it. 
             foreach ($productsArray as $product) { 
                 echo '
                 <label id="'.$product->getSKU().'" class="rounded-3xl bg-white shadow-lg w-80 h-80 m-12 p-7 ease-in-out duration-500  hover:scale-110 hover:bg-red-400 hover:shadow-red-600 hover:shadow-2xl hover:cursor-pointer ">

@@ -37,7 +37,6 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
             </div>
         </div>
     </nav>
-    <p>AY YO JQUERY IS NOT WORKING FOR SOME REASON DUDE</p>
     <form id="product_form" action="#" class="grid grid-cols-2 gap-6 items-center max-w-[80%]">
         <!-- TODO: Add icons for the input fields-->
         <div class="max-w-s m-12">
@@ -116,51 +115,6 @@ ob_start(); // I have absolutely no idea why this works, but it does. I mean it 
 </html>
 <?php
 
-// if(isset($_POST["sku"]) || isset($_POST["name"]) || isset($_POST["price"]) || isset($_POST["productType"])){
-//     // TODO: Add these cheecks into the Product class. This will allow us later on to add more checks.
-//     // When making a product object make sure you are using the values of the $_POST and not the values you are using for checks.
 
-//     $sku = Product::checkProductSKU($_POST["sku"]);
-//     $name = Product::checkProductName($_POST["name"]);
-//     $price = Product::checkProductPrice($_POST["price"]);
-//     // $productType = Product::checkProductType($_POST["productType"]);
-//     // $propertyValue = Product::checkProductPropertyValue($_POST["propertyValue"]);
-
-//     // I don't know why the previous 2 lines won't work, but this seems to fix it. Looks ugly though maybe I should refactor this, later.
-//     if(isset($_POST["productType"]) && isset($_POST["propertyValue"])){
-//         $productType = Product::checkProductType($_POST["productType"]);
-//         $propertyValue = Product::checkProductPropertyValue($_POST["propertyValue"]);
-//     } else {
-//         $productType = 0;
-//         $propertyValue = 0;
-//     }
-
-//     // This is to basically print out error messages. Could've I used PHP for this and made it simpler? Probably. 
-// echo '
-// <script type="text/javascript">
-// verifyFields('.$sku.', '.$name.', '.$price.', "'.$productType.'", '.$propertyValue.');
-// </script>
-// ';
-
-
-//     $productType = strlen($productType) > 1 ? 1 : 0; // This is to set a boolean value for the product type. 
-
-//     if($sku == 1 && $name == 1 && $price == 1 && $productType == 1 && $propertyValue == 1){
-//         $sku = $_POST["SKU"];
-//         $name = $_POST["name"];
-//         $price = $_POST["price"];
-//         $productType = $_POST["productType"];
-//         $propertyValue = $_POST["propertyValue"];
-
-//         $newProduct = Product::createProductObject($name, $sku, $productType, $price, $propertyValue);
-//         if(isset($newProduct)){
-//             if($newProduct->insertToDB()){
-//                 header("Location: ../index.php");
-//             } else {
-//                 echo "If this message appears then I have no idea what happened and I'll probably attempt to fix it for a long time.";
-//             }
-//         }
-//     }
-// }
 
 ?>

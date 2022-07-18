@@ -1,7 +1,3 @@
-// TODO: REMOVE THIS LATER
-$(document).ready(function(){
-    $('p').hide();
-});
 
 function isNumeric(str) {
     if (typeof str != "string")
@@ -196,52 +192,3 @@ function checkItem(SKU){
 
     document.cookie = "checkedList=" + finalCheckedList;
 }
-
-function checkedArray(){
-    return finalCheckedList;
-}
-
-// SKU: 0, empty | 1, OK | -1, duplicate
-// name: 0, empty | 1, OK
-// price: 0, empty | 1, OK
-// type: 0, empty | DVD | Furniture | Book
-// property: 0, empty | 1, OK
-function verifyFields(SKU, name, price, type, property){
-    var skuElementLabel = document.getElementById("sku").previousElementSibling;
-    var nameElementLabel = document.getElementById("name").previousElementSibling;
-    var priceElementLabel = document.getElementById("price").previousElementSibling;
-    var propertyType = document.getElementById("productType").previousElementSibling;
-    var propertyElement = document.getElementById("property");
-    
-    console.log(type);
-    console.log(property);
-
-    if(SKU == 0){
-        skuElementLabel.insertAdjacentHTML("beforeend", `<span class="ml-10 text-red-500 text-xs ">* SKU number is required</span>`);
-    }
-
-    if(name == 0){
-        nameElementLabel.insertAdjacentHTML("beforeend", `<span class="ml-10 text-red-500 text-xs ">* Name is required</span>`);
-    }
-
-    if(price == 0){
-        priceElementLabel.insertAdjacentHTML("beforeend", `<span class="ml-10 text-red-500 text-xs ">* Price is required</span>`);
-    }
-
-    if(type == 0){
-        propertyType.insertAdjacentHTML("beforeend", `<span class="ml-10 text-red-500 text-xs ">* Type is required</span>`);
-    }
-
-
-    if(type == "Furniture" && property == 0){
-        propertyElement.innerHTML = `<span class="ml-10 text-red-500 text-xs ">* All Furniture dimensions are required, please enter them again.</span>`
-    }
-    else if(type == "DVD" && property == 0){
-        propertyElement.innerHTML = `<span class="ml-10 text-red-500 text-xs ">* DVD size is required, please enter it again.</span>`
-    }
-    else if(type == "Book" && property == 0){
-        propertyElement.innerHTML = `<span class="ml-10 text-red-500 text-xs ">* Book weight is required, please enter it again.</span>`
-    }
-
-}
-
