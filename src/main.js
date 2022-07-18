@@ -3,6 +3,13 @@ $(document).ready(function(){
     $('p').hide();
 });
 
+function isNumeric(str) {
+    if (typeof str != "string")
+        return false;
+
+    return !isNaN(str) && !isNaN(parseFloat(str));
+}
+
 function submitClick(){
     form = $('#product_form').serializeArray();
     console.log(form);
@@ -29,42 +36,57 @@ function submitClick(){
 }
 
 function require(fieldName, text){
-    console.log(fieldName);
-    console.log(text);
 
     let field = document.getElementById(fieldName);
-    let propValues = document.getElementsByName("propertyValue");
-    let fieldLabel = field.previousElementSibling;
+    let fieldLabel;
+    if(field != null){
+        fieldLabel = field.previousElementSibling;
 
-    $.each(propValues, function(i, value){
-        propValueLabel = value.previousElementSibling;
-        if(value.value == ""){
-            propValueLabel.innerHTML = "* This field is required";
+        if(text.length < 1){
+            fieldLabel.innerHTML = "* This field is required";
         }
         else{
-            propValueLabel.innerHTML = "";
+            fieldLabel.innerHTML = "";
         }
     }
-    );
-    
-    if(text.length < 1){
-        fieldLabel.innerHTML = "* This field is required";
-    }
-    else{
-        fieldLabel.innerHTML = "";
-    }
 
+    if(fieldLabel == null){  // The more property fields we have, the more this check happens, it's definitely a bug that needs fixing, later, however.
+        let propValues = document.getElementsByName("propertyValue");
+        
+        for(let i = 0; i < propValues.length; i++){
+            let propValueLabel = propValues[i].previousElementSibling;
+            let propValue = propValues[i].value;
+            
+            if(propValue.length < 1){
+                propValueLabel.innerHTML = "* This field is required";
+            }
+            else if (!isNumeric(propValue)){
+                propValueLabel.innerHTML = "* This field must be a number";
+            } else {
+                propValueLabel.innerHTML = "";
+            }
+            
+        }
+    }
+    
+    // Checks if SKU is already in the database
     if(fieldName == "sku"){
         $.ajax({
             url: "../process/skuCheck.php",
             type: "POST",
-            data: {sku: field.value},
+            data: {sku: text},
             success: function(res){
                 if(res == -1){
                     document.getElementById(field.name).previousElementSibling.innerHTML = "* This SKU already exists";
                 }
             }
         });
+    }
+
+    if(fieldName == "price" && text != ""){
+        if(!isNumeric(text)){
+            document.getElementById(field.name).previousElementSibling.innerHTML = "* This field must be a number";
+        }
     }
 
 
