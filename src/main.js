@@ -34,7 +34,7 @@ function submitClick(){
                 propArr: propertiesArr
             },
             success: function(res){
-                alert(res);
+                window.location.replace("../index.php");
             }
         });
     }    

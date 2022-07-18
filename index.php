@@ -97,7 +97,7 @@ ob_start();
             }
         ?>
     </div>
-    <script type="module" src="src/main.js"></script>
+    <script src="./src/main.js"></script>
 </body>
 <!-- FEATURE: Maybe add a simple footer? -->
 </html>
