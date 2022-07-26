@@ -11,6 +11,7 @@ class Furniture extends Product {
         $this->height = $dimensions[0];
         $this->width = $dimensions[1];
         $this->length = $dimensions[2];
+        $this->propertyName = "Dimensions";
     }
 
     public function getHeight() {

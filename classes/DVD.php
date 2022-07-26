@@ -7,6 +7,7 @@ class DVD extends Product {
     public function __construct($name, $SKU, $type, $price, $size) {
         parent::__construct($name, $SKU, $type, $price);
         $this->size = $size;
+        $this->propertyName = "Size";
     }
 
     public function getSize() {
